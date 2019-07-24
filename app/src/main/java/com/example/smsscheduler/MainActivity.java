@@ -3,13 +3,13 @@ package com.example.smsscheduler;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String MYKEY = "somekey";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +20,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickHandler(View view) {
+        Intent otherIntent = new Intent(this,OtherActivity.class);
+      //  serviceIntent.putExtra(MYKEY,"http://google.com");
+        Property property = new Property(123,
+                "streetname","suburb","state",
+                "description",123.321,"imageurl",
+                3,3,3,true);
+
         switch (view.getId()){
             case R.id.alarm_button:
-                createAlarm();
+                //createAlarm();
                 break;
-            case R.id.button_music:
-                Intent serviceIntent = new Intent(this,MusicService.class);
-                startService(serviceIntent);
+            case R.id.button_startservice:
+                otherIntent.putExtra("property",property);
+                startActivity(otherIntent);
+                ///startService(serviceIntent);
+                break;
+            case R.id.button_stop_service:
+               // stopService(serviceIntent);
                 break;
         }
 

@@ -24,12 +24,14 @@ public class MusicService extends Service {
 
         MediaPlayer player = MediaPlayer.create(this,R.raw.music);
         player.start();
+       // stopSelf();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
          super.onStartCommand(intent, flags, startId);
-        Log.i(TAG,"onStartCommand service ");
+         String url = intent.getStringExtra(MainActivity.MYKEY);
+        Log.i(TAG,"onStartCommand url = "+url);
 
         playMusic();
         return START_STICKY;
@@ -39,6 +41,8 @@ public class MusicService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i(TAG,"onDestroy service ");
+
     }
 
     @Override
